@@ -1,12 +1,16 @@
 package com.lld.logger.loggerLLD.handlers;
 
+import com.lld.logger.loggerLLD.constants.LogLevel;
+import com.lld.logger.loggerLLD.observer.Subject;
+
 public class ErrorHandler extends AbstractLogger {
-    public ErrorHandler(int level) {
+    public ErrorHandler(LogLevel level) {
         this.logLevel = level;
     }
 
     @Override
-    public void printLogMessage(String message) {
-        System.out.printf("ERROR: %s\n", message);
+    public void printLogMessage(String message, Subject subject) {
+        String msg = "ERROR: "+ message;
+        subject.notifyObservers(msg);
     }
 }

@@ -1,16 +1,19 @@
 package com.lld.logger.loggerLLD;
 
 import com.lld.logger.loggerLLD.constants.LogLevel;
-import com.lld.logger.loggerLLD.factory.LoggerChainFactory;
+import com.lld.logger.loggerLLD.factory.LoggerFactory;
 import com.lld.logger.loggerLLD.handlers.AbstractLogger;
+import com.lld.logger.loggerLLD.observer.Subject;
 
 public class Logger {
 
     private static Logger logger;
     private AbstractLogger loggerChain;
+    private Subject logSubject;
 
     private Logger() {
-        this.loggerChain = LoggerChainFactory.createLoggerChain();
+        this.loggerChain = LoggerFactory.createLoggerChain();
+        this.logSubject= LoggerFactory.createSubject();
     }
 
     public static Logger getLogger() {
@@ -25,7 +28,7 @@ public class Logger {
     }
 
     public void log(LogLevel logLevel, String msg) {
-       this.loggerChain.log(logLevel.getLevel(),msg);
+       this.loggerChain.log(logLevel.getLevel(),msg, this.logSubject);
     }
 
     public void info(String msg) {

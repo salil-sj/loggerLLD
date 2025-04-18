@@ -11,8 +11,8 @@ class LldForLoggerApplicationTests {
 	void testLogger() {
 
 		Logger logger = Logger.getLogger();
-	//	logger.error("THIS is a debug message");
-		logger.log(LogLevel.WARN, "THIS is a warn message");
+		logger.error("This is a error msg");
+		logger.info("This is an info msg");
 	}
 
 }

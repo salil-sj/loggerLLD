@@ -1,5 +1,8 @@
     package com.lld.logger.loggerLLD.handlers;
 
+    import com.lld.logger.loggerLLD.constants.LogLevel;
+    import com.lld.logger.loggerLLD.observer.LogSubject;
+    import com.lld.logger.loggerLLD.observer.Subject;
     import lombok.Getter;
     import lombok.Setter;
 
@@ -15,7 +18,7 @@
 
             - Class which will instantiate the chain of handlers
          */
-        int logLevel;  // log level of current handler
+        LogLevel logLevel;  // log level of current handler
 
         private AbstractLogger nextLogger;
 
@@ -28,16 +31,16 @@
         /*
             - decides if this log handler will serve the rew, or will make it go to next handler in the chain
          */
-        public void log(int desiredLevel , String message){
-            if(this.logLevel <= desiredLevel){
-                printLogMessage(message);
+        public void log(int desiredLevel , String message, Subject subject) {
+            if(this.logLevel.getLevel() == desiredLevel){
+                printLogMessage(message, subject);
             }
             if (this.nextLogger != null) {
-                this.nextLogger.log(desiredLevel, message);
+                this.nextLogger.log(desiredLevel, message, subject);
             }
         }
 
-        public abstract void printLogMessage(String message);  // method each log concrete handler will implement in its own way
+        public abstract void printLogMessage(String message, Subject subject);  // method each log concrete handler will implement in its own way
 
 
     }

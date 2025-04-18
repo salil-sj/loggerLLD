@@ -3,9 +3,8 @@ package com.lld.logger.loggerLLD.constants;
 public enum LogLevel {
     INFO(1,"INFO"),
     DEBUG(2,"DEBUG"),
-    WARN(3,"WARN"),
-    ERROR(4,"ERROR"),
-    HAZARD(5,"HAZARD");
+    ERROR(3,"ERROR");
+
 
     private final int level;
     private final String name;
