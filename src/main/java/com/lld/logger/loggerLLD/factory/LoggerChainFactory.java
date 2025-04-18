@@ -1,9 +1,6 @@
 package com.lld.logger.loggerLLD.factory;
 
-import com.lld.logger.loggerLLD.handlers.AbstractLogger;
-import com.lld.logger.loggerLLD.handlers.DebugHandler;
-import com.lld.logger.loggerLLD.handlers.ErrorHandler;
-import com.lld.logger.loggerLLD.handlers.InfoHandler;
+import com.lld.logger.loggerLLD.handlers.*;
 
 public class LoggerChainFactory {
 
@@ -11,8 +8,8 @@ public class LoggerChainFactory {
         AbstractLogger infoLogger = new InfoHandler(1);
         AbstractLogger debugLogger = new DebugHandler(2);
         AbstractLogger errorLogger = new ErrorHandler(3);
-
-        infoLogger.setNextLogger(debugLogger).setNextLogger(errorLogger);
+        AbstractLogger warnLogger = new WarnHandler(4);
+        infoLogger.setNextLogger(debugLogger).setNextLogger(errorLogger).setNextLogger(warnLogger);
         return infoLogger;
     }
 }
